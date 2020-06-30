@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/4910394370.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/Content/styles.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/Scripts.js"></script>
+    @*@Styles.Render("~/Content/css")*@
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <nav id="top-bar" class="navbar navbar-expand-md bg-light navbar-light d-none d-lg-block ">
+    @*<nav id="top-bar" class="navbar navbar-expand-md bg-dark navbar-dark d-none d-lg-block ">*@
+        <div class="container d-flex">
+            <div class="contact-info mr-auto ">
+                <i class="fas fa-envelope-square 3x"></i><a href="mailto:contact@example.com"> InterstellarTeam@gmail.com</a>
+                &nbsp;&nbsp;&nbsp;<i class="fas fa-phone-square 3x"></i> 02 0106 07852 68
+            </div>
+            <div class="social-links">
+                <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="facebook"><i class="fab fa-facebook-square"></i></a>
+                <a href="#" class="instagram"><i class="fab fa-instagram-square"></i></a>
+                <a href="#" class="skype"><i class="fab fa-skype"></i></a>
+                <a href="#" class="linkedin"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="navbar navbar-expand-sm bg-secondary shadow-sm p-3 navbar-light sticky-top navbar-header" id="myHeader">
+        <a href="index.html"><img src="~/Content/logo.png" alt="" class="img-fluid" style="width:2rem;height:2rem"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white" id="activelink" href="#">Home</a>
+                </li>
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        About
+                    </a>
+                    <div class="dropdown show">
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Science</a></li>
+                            <li><a class="dropdown-item" href="#">Commerce</a></li>
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="#">Arts</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">History</a></li>
+                                    <li><a class="dropdown-item" href="#">Geography</a></li>
+                                    <li><a class="dropdown-item" href="#">Sociology</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Service</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Portfolio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                <li>
+                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                </li>
+                <li>
+                    @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="#">Contact</a>
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Register", "Register", "Account",new { @class= "btn btn-outline-success" })
+                </li>
+                <li class="nav-item">
+                    &nbsp;&nbsp;&nbsp;@Html.ActionLink("Login", "Login", "Account", new { @class = " btn btn-outline-primary" })
+
+                <li>
+                    @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
+
+                </li>
+
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </nav>
+
+    @*<div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Interstellar Team Application</p>
+        </footer>*@
+    <div class="row w-100">
+        <div class="col-3 position-sticky" style="height:100%;margin-top:10px">
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">About</a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Contact</a>
+                <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Categories
+                </a>
+            </div>
+        </div>
+        <div class="col-8">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy;MTS Every where you go @DateTime.Now.Year </p>
+            </footer>
+        </div>
+    </div>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+</body>
+</html>

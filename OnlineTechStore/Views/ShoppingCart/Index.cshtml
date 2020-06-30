@@ -1,0 +1,65 @@
+﻿@using OnlineTechStore.Models;
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Your Shopping Cart</h2>
+
+<table class="table table-hover table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Sub Total</th>
+        <th>Control</th>
+    </tr>
+    @if ((List<Cart>)Session["Cart"] == null)
+    {
+        <tr>
+            <td>
+                <h3>Shopping Cart (0)</h3>
+                <p style="background-color:burlywood;color:black">
+                    Shopping cart is currently empty<br />
+                    Add items to your cart and view them here before you checkout.
+                </p>
+            </td>
+        </tr>
+    }
+    else
+    {
+        foreach (var cart in (List<Cart>)Session["Cart"])
+        {
+            <tr>
+                <td>@cart.Product.Name</td>
+                <td>@cart.Product.Price</td>
+                <td>@cart.Quantity</td>
+                <td>@(string.Format("{0:N0}", cart.Product.Price * cart.Quantity))</td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", "ShoppingCart", new { id = cart.Product.ID },
+                   new { onclick = "return confirm ('Are you sure you want to delete this ?')" })
+                </td>
+            </tr>
+        }
+    }
+    @if ((List<Cart>)Session["Cart"] != null)
+    {
+        <tr>
+            <td colspan="4">
+                Total :
+            </td>
+            <td>
+                @{
+                    List<Cart> temp = (List<Cart>)Session["Cart"];
+                    var total = string.Format("{0:N0}", temp.Sum(x => x.Quantity * x.Product.Price));
+                }
+                @total L.E
+            </td>
+        </tr>
+     }
+    </table>
+<br />
+<a class="btn btn-outline-dark rounded float-md-right" href="/ShoppingCart/MakeOrder">Order Now</a>
+<br />
+<br />
+
+@Html.ActionLink("Continue Shopping?", "CustomerIndex", "Product", null, new { @class = "btn btn-outline-warning" })

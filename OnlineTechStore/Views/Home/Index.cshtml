@@ -1,0 +1,98 @@
+﻿@model ICollection<OnlineTechStore.Models.Category>
+@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+
+    .icon-box {
+        background-color: #fff;
+        color: black;
+        text-align: left;
+        box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 4.7px 3.3px rgba(0, 0, 0, 0.048), 0 8.5px 8px rgba(0, 0, 0, 0.06), 0 16.3px 12.9px rgba(0, 0, 0, 0.072), 0 35.8px 25.4px rgba(0, 0, 0, 0.086), 0 90px 60px rgba(0, 0, 0, 0.12);
+        min-height: 200px;
+        width: 100%;
+        margin: 50px auto;
+        padding: 40px;
+        background: white;
+        border-radius: 5px;
+    }
+
+        .icon-box img {
+            width: 100px;
+            height: 100px;
+        }
+
+    .clients {
+        margin-top: 2rem;
+        background-color: #fff;
+        color: black;
+        text-align: center;
+        min-height: 100px;
+        width: 100%;
+        background: white;
+    }
+
+    #owl-clients .item {
+        margin: 3px;
+    }
+
+        #owl-clients .item img {
+            display: block;
+            width: 70%;
+            height: auto;
+            opacity: 0.5;
+            transition: 0.3s;
+            -webkit-filter: grayscale(100);
+            filter: grayscale(100);
+        }
+
+            #owl-clients .item img:hover {
+                -webkit-filter: none;
+                filter: none;
+                opacity: 1;
+            }
+</style>
+
+@*@using (Html.BeginForm("Search", "Home", FormMethod.Get))
+    {
+        @Html.TextBox("Name", null, new { @class = "form form-control", style = "display:inline; width:89%" })
+        <input type="submit" value="Search" class="btn btn-warning" style="margin-left:10px" />
+    }*@
+<input type="text" id="SearchText" class="form form-control" placeholder=" Search . . ." />
+<br>
+
+<div class="container">
+    <div class="row w-100">
+        @foreach (var item in Model)
+        {
+            <div style="text-align:center" class="col-3 m-4 mx-auto itemSearch">
+                <a href="Product/CustomerIndex/@item.ID">
+                    <img class="img-fluid img-thumbnail rounded" src="~/Content/images/@item.Thumbnail" style="height:15vw">
+                    <span>@item.Name</span>
+                </a>
+            </div>
+        }
+    </div>
+</div>
+<br />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $("#SearchText").on("keyup", function () {
+        var name = $(this).val();
+        $(".itemSearch").each(function (results) {
+            if (results >= 0) {
+                var id = $(this).find("span").text();
+                if (id.indexOf(name) !== 0 && id.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) < 0) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            }
+        })
+    });
+</script>
+
+
+
+

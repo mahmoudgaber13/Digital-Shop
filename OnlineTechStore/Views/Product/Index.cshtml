@@ -1,0 +1,133 @@
+﻿@model IEnumerable<OnlineTechStore.Models.Product>
+
+@*@model PagedList.IPagedList<OnlineTechStore.Models.Product>
+@using PagedList.Mvc;*@
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@*@using (Html.BeginForm("Search", "Product", FormMethod.Get))
+    {
+        @Html.TextBox("ProductName", null, new { @class = "form form-control",id="SearchText", style = "display:inline; width:89%" })
+        <input type="submit" value="Search" class="btn btn-success" style="margin-left:10px" />
+    }*@
+<style>
+    .icon-box {
+        background-color: #fff;
+        color: black;
+        text-align: left;
+        box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 4.7px 3.3px rgba(0, 0, 0, 0.048), 0 8.5px 8px rgba(0, 0, 0, 0.06), 0 16.3px 12.9px rgba(0, 0, 0, 0.072), 0 35.8px 25.4px rgba(0, 0, 0, 0.086), 0 90px 60px rgba(0, 0, 0, 0.12);
+        /*min-height: 10rem;*/
+        /*height:17rem;*/
+        width: 100%;
+        margin: 1rem auto;
+        padding: 20px;
+        background: white;
+        border-radius: 5px;
+    }
+
+        .icon-box img {
+            width: 100%;
+            height: 5rem;
+        }
+</style>
+<input type="text" id="SearchText" class="form form-control" placeholder=" Search . . ." />
+<br>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Stock")
+        </th>
+        <th>
+            @Html.DisplayName("Name")
+        </th>
+        <th>
+            @Html.DisplayName("Price")
+        </th>
+        <th>
+            @Html.DisplayName("Weigth")
+        </th>
+        <th style="width:150px">
+            @Html.DisplayName("Description")
+        </th>
+
+        <th>
+            @Html.DisplayName("Image")
+        <th  style="width:70px">
+            @Html.DisplayName("Category")
+        </th>
+        <th>
+            @Html.DisplayName("CreateDate")
+        </th>
+        <th></th>
+    </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weigth)
+                </td>
+                <td style="width:150px">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <img src="~/Content/images/@item.Image" style="width:30px" />
+                </td>
+                <td  style="width:70px">
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </table>
+@*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount*@
+<br>
+@*<ul class="pagination">
+    @for (var i = 1; i <= ViewBag.NumberOfPages; i++)
+    {
+        <li class="page-item">
+            <a href="/Product/Index?page=@i" class="page-link">@i</a>
+        </li>
+    }
+</ul>*@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $("#SearchText").on("keyup", function () {
+        var name = $(this).val();
+        $("table tr").each(function (results) {
+            console.log(results);
+            if (results !== 0) {
+                var id = $(this).find("td:nth-child(2)").text();
+                if (id.indexOf(name) !== 0 && id.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) < 0) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            }
+        })
+    });
+</script>
+

@@ -1,0 +1,94 @@
+﻿@model PagedList.IPagedList<OnlineTechStore.Models.Product>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .icon-box {
+        background-color: #fff;
+        color: black;
+        text-align: left;
+        box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 4.7px 3.3px rgba(0, 0, 0, 0.048), 0 8.5px 8px rgba(0, 0, 0, 0.06), 0 16.3px 12.9px rgba(0, 0, 0, 0.072), 0 35.8px 25.4px rgba(0, 0, 0, 0.086), 0 90px 60px rgba(0, 0, 0, 0.12);
+        /*min-height: 10rem;*/
+        /*height:17rem;*/
+        width: 100%;
+        margin: 1rem auto;
+        padding: 20px;
+        background: white;
+        border-radius: 5px;
+    }
+
+    .icon-box img {
+        width: 100%;
+        height: 5rem;
+    }
+</style>
+<input type="text" id="SearchText" class="form form-control" placeholder=" Search . . ." />
+<br>
+
+
+<div class="container">
+    <div class="row all">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-xs-2 itemSearch">
+                <div class="icon-box  rounded ">
+                    <img src="~/Content/images/@item.Image" class="mx-fluid rounded">
+                    <p>
+                        <h6> @Html.DisplayFor(modelItem => item.Name)</h6>
+                       Price: @Html.DisplayFor(modelItem => item.Price)<br />
+                        <br />
+                        
+                        <a class="btn btn-outline-warning" href="/Product/CustomerDetails/@item.ID">Detailes</a>
+
+                    </p>
+
+                </div>
+            </div>
+        }
+    </div>
+    <div class="AAA"></div>
+</div>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+<br>
+<ul class="pagination">
+    @for (var i = 1; i <= ViewBag.NumberOfPages; i++)
+    {
+       
+        <li class="page-item">
+            <a href="/Product/CustomerIndex?page=@i" class="page-link">@i</a>
+        </li>
+       
+    }
+    
+</ul>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $("#SearchText").on("keyup", function () {
+        var name = $(this).val();
+        var matched = $(".all .itemSearch").length;
+        $(".itemSearch").each(function (results) {
+            if (results >= 0) {
+                var id = $(this).find("h5").text();
+                if (id.indexOf(name) !== 0 && id.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) < 0) {
+                    $(this).hide();
+                    matched--;
+                }
+                else {
+                    $(this).show();
+                    matched++;
+                }
+            }
+            if (matched == 0) {
+                $(".AAA").html("<h2 style='text - align: center'>No thing With This Name</h2>");
+            }
+            else {
+                $(".AAA").html("");
+            }
+        })
+        
+    });
+</script>
+

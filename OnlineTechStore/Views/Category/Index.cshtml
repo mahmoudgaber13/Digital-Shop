@@ -1,0 +1,73 @@
+﻿@model IEnumerable<OnlineTechStore.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Categories</h2>
+@*@using (Html.BeginForm("Search", "Category", FormMethod.Get))
+    {
+        @Html.TextBox("CategoryName", null, new { @class = "form form-control", style = "display:inline; width:89%" })
+        <input type="submit" value="Search" class="btn btn-success" style="margin-left:10px" />
+    }*@
+<input type="text" id="SearchText" class="form form-control" placeholder=" Search ..." />
+<br>
+<br>
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-outline-dark" })
+</p>
+<table class="table table-striped text-center" >
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Thumbnail)
+        </th>
+        <th>
+            Controls
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <img style="width:30px" src="~/Content/images/@item.Thumbnail" />
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-warning" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $("#SearchText").on("keyup", function () {
+        var name = $(this).val();
+        $("table tr").each(function (results) {
+            console.log(results);
+            if (results !== 0) {
+                var id = $(this).find("td:nth-child(1)").text();
+                if (id.indexOf(name) !== 0 && id.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) < 0) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            }
+        })
+    });
+</script>

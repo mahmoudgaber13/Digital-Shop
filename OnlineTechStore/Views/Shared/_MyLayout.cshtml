@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://kit.fontawesome.com/4910394370.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/Content/Style.css" rel="stylesheet" />
+</head>
+<body>
+    @*Left navbar*@
+    <div class="wrapper d-flex align-items-stretch">
+            <nav id="sidebar">
+                <div class="p-4 pt-5">
+                    <a href="#" class="img logo rounded-circle mb-5" style="background-image: url(images/logo.jpg);"></a>
+                    <ul class="list-unstyled components mb-5">
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Orders", "Index", "Orders", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Categories", "Index", "Category", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Products", "Index", "Product", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Add-Admin", "RegisterAdmin", "Account", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Role", "Index", "Role", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link " })</li>
+                            <li>@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link " })</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link " })</li>
+                        }
+                    </ul>
+                    <div class="footer">
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> This Site is made <i class="icon-heart" aria-hidden="true"></i> by <a href="#">ITI-Pioneers-Team</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+            </nav>
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    
+                        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                            <i class="fa fa-bars"></i>
+                            <span class="sr-only">Toggle Menu</span>
+                        </button>
+                    
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li>
+                                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                            </li>
+                            <li>
+                                <a class="nav-link" href="/ShoppingCart/Index">Cart <i class="fas fa-shopping-cart"></i></a>
+                            </li>
+                            @Html.Partial("_LoginPartial")
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            @RenderBody()
+            <hr />
+            @*<footer class="flex-row">
+                <p>&copy; @DateTime.Now.Year - ITI-Pioneers-Team</p>
+                <ul class="nav navbar-nav ml-auto">
+                    <li>
+                        @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
+                    </li>
+                </ul>
+            </footer>*@
+            <footer class="row w-100" style="text-align: center;">
+
+                <div class="col-md-4 col-xs-12">
+
+                    Copyright © ITI-Pioneers-Team
+                    <br><br>
+                </div>
+                <div class="col-md-4 col-xs-12">
+
+                    <a href="#">
+                        <i class="circleFa2 fab fa-twitter fa-lg  m-1"></i>
+                    </a>
+                    <a href="#">
+                        <i class="circleFa2 fab fa-facebook-f fa-lg  m-1"></i>
+                    </a>
+                    <a href="#">
+                        <i class="circleFa2 fab fa-linkedin-in fa-lg  m-1"></i>
+                    </a>
+                    <br><br>
+                </div>
+                <div class="col-md-4 col-xs-12 flex-row ">
+                    @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link d-inline" })
+                    @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link d-inline" })
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!--Footer-->
+    <script src="~/Content/Scripts/jquery.min.js"></script>
+    <script src="~/Content/Scripts/popper.js"></script>
+    <script src="~/Content/Scripts/bootstrap.min.js"></script>
+    <script src="~/Content/Scripts/main.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
